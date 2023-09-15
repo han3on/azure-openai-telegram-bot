@@ -24,10 +24,10 @@ class OpenAIParser:
     # config_dict = {}
 
     def __init__(self):
-        openai.api_type = azure_openai_config.get("api_type")
-        openai.api_key = azure_openai_config.get("api_key")
-        openai.api_base = azure_openai_config.get("api_base")
-        openai.api_version = azure_openai_config.get("api_version")
+        openai.api_key = ConfigLoader.get("openai", "api_type")
+        openai.api_key = ConfigLoader.get("openai", "api_key")
+        openai.api_key = ConfigLoader.get("openai", "api_base")
+        openai.api_key = ConfigLoader.get("openai", "api_version")
 
     def _get_single_response(self, message):
         response = openai.ChatCompletion.create(engine = ConfigLoader.get("openai", "chat_model"),
