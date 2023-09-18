@@ -7,9 +7,9 @@
     "openai": {
         "api_type": "azure",
         "api_key": "<YOUR_AZURE_OPENAI_API_KEY_HERE>",
-        "api_base": "https://east-2-shadow.openai.azure.com",
+        "api_base": "<YOUR_AZURE_OPENAI_API_ENDPOINT_HERE>",
         "api_version": "2023-08-01-preview",
-        "chat_model": "EastChat8K",
+        "chat_model": "<YOUR_AZURE_OPENAI_DEPLOYMENT_NAME_HERE>",
         "chat_temperature": 0.2,
         "enable_custom_system_role": true,
         "default_system_role": "You are a helpful assistant",
