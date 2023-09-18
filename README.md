@@ -1,8 +1,8 @@
-# Azure Openai Bot for Telegram
+# Azure OpenAI Bot for Telegram
 
 ## 🐱 Introduction
 
-Azure Openai Bot for Telegram is implemented with [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/) . The Telegram integration framework is based on [python-telegram-bot](https://python-telegram-bot.org).
+Azure OpenAI Bot for Telegram is implemented with [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/) . The Telegram integration framework is based on [python-telegram-bot](https://python-telegram-bot.org).
 
 ## 👷 Deploy Your Own
 
