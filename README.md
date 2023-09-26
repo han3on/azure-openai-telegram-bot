@@ -12,7 +12,7 @@ Azure OpenAI Bot for Telegram is implemented with [Azure OpenAI Service](https:/
 2. Create an Azure account and get the API key and endpoint.
 3. A Linux VM or a server with Python 3 is needed to run the Bot.
 4. A practical Internet environment is required.
-5. (Optional) [FFmpeg](https://ffmpeg.org) is required for the Bot to handle voice messages with Whisper. If you are not interested in using voice messages, you don't need to install it and **must set `enable_voice` in the config file to False**.
+5. (Optional) [FFmpeg](https://ffmpeg.org) is required for the Bot to handle voice messages with Azure Speech Studio. If you are not interested in using voice messages, you don't need to install it and **must set `enable_voice` in the config file to False**.
 6. (Optional) [Azure TTS SDK](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstarts/setup-platform?pivots=programming-language-python&tabs=linux) is required for the Bot to reply with voice messages.
 
 ### Installation
