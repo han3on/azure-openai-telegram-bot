@@ -141,7 +141,7 @@ class TelegramMessageParser:
             )
             return
 
-        # send message to openai
+        # send message to azure openai
         response = self.message_manager.get_response(
             str(update.effective_chat.id), 
             str(update.effective_user.id), 
@@ -175,7 +175,7 @@ class TelegramMessageParser:
             await new_file.download_to_drive(file_id + ".ogg")
 
             file_size = os.path.getsize(file_id + ".ogg") / 1000
-            # # if < 200kB, convert to wav and send to openai
+            # # if < 200kB, convert to wav and send to azure speech studio
             # if file_size > 50:
             #     await update.message.reply_text("Sorry, the voice message is too long.")
             #     return
