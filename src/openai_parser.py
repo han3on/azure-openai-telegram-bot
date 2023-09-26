@@ -57,7 +57,7 @@ class OpenAIParser:
             return (response["choices"][0]["message"]["content"], response["usage"]["total_tokens"])
         except Exception as e:
             LoggingManager.error("OpenAI GPT request for user %s with error: %s" % (userid, str(e)), "OpenAIParser")
-            return ("Oops, something went wrong with OpenAI. Please try again later.", 0)
+            return ("Oops, something went wrong with Azure OpenAI. Please try again later.", 0)
 
     def speech_to_text(self, userid, audio_file):
         LoggingManager.debug("Get OpenAI Speech to Text for user: %s" % userid, "OpenAIParser")
