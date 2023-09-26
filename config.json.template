@@ -35,7 +35,7 @@
         "tts_reply": false,
         "text_as_caption": false
     },
-    "azure_tts": {
+    "azure_speech": {
         "language": "en-GB",
         "voice": "en-GB-SoniaNeural",
         "subscription_key": "<YOUR_AZURE_TTS_SUBSCRIPTION_KEY_HERE>",
