@@ -109,7 +109,7 @@ class TelegramMessageParser:
             action="typing"
         )
 
-        # send message to openai
+        # send message to azure openai
         response = self.message_manager.get_response(
             str(update.effective_chat.id), 
             str(update.effective_user.id), 
@@ -152,7 +152,7 @@ class TelegramMessageParser:
         LoggingManager.debug("Sending response to user: %s" % str(update.effective_user.id), "TelegramMessageParser")
         await update.message.reply_text(response)
 
-    # voice message in private chat, speech to text with Whisper API and process with ChatGPT
+    # voice message in private chat, speech to text with Azure Speech Studio and process with Azure OpenAI
     async def chat_voice(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         LoggingManager.info("Get a voice message from user: %s" % str(update.effective_user.id), "TelegramMessageParser")
         # check if it's a private chat
@@ -210,7 +210,7 @@ class TelegramMessageParser:
             action = action
         )
 
-        # send message to openai
+        # send message to azure speech studio
         response = self.message_manager.get_response(
             str(update.effective_chat.id), 
             str(update.effective_user.id), 
