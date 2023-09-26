@@ -9,7 +9,7 @@ class AzureParser:
     # return true for success, false for failure
     def text_to_speech(self, text, file_id):
         LoggingManager.info("Get Azure TTS request, file save to %s" % file_id, "AzureParser")
-        speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_tts", "subscription_key"), region=ConfigLoader.get("azure_tts", "subscription_region"))
+        speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_speech", "subscription_key"), region=ConfigLoader.get("azure_speech", "subscription_region"))
         # https://learn.microsoft.com/zh-cn/azure/cognitive-services/speech-service/language-support?tabs=tts
         language, voice = self._detect_language(text)
         speech_config.speech_synthesis_language = language # will be ignored if voice is specified
@@ -28,8 +28,8 @@ class AzureParser:
 
     def _detect_language(self, text):
         # https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=tts
-        voice = ConfigLoader.get("azure_tts", "voice")
-        language = ConfigLoader.get("azure_tts", "language")
+        voice = ConfigLoader.get("azure_speech", "voice")
+        language = ConfigLoader.get("azure_speech", "language")
         if voice != "": # voice is specified
             try:
                 language = voice.split("-")[0] + "-" + voice.split("-")[1].upper()
