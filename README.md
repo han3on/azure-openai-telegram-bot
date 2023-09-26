@@ -35,18 +35,12 @@ cp config.json.template config.json
 
 **Recommended:** You should keep `config.json.template` unmodified because the Bot needs to read default configuration values from it. For backward compatibility, it is highly recommended to check the template for newly added parameters when you update to a new version.
 
-For more details, see [documentation](docs/config_file.md).
-
 3. Run the Bot with `start_bot.sh` and try talk to it. You can also use docker to run the Bot.
 
 ```bash
 # First, make sure you are in the root directory of the project,
-# aka <your_download_location>/chatgpt-telegram-bot
+# aka <your_download_location>/azure-openai-telegram-bot
 bash ./bin/start_bot.sh # start the Bot
-
-# Use docker compose to run the Bot
-docker compose up -d
-```
 
 To clear ChatGPT conversation context and restart the Bot, run shell script `restart_bot.sh`. To shut down the Bot, run `stop_bot.sh`.
 
@@ -70,7 +64,6 @@ In a personal chat with a contact, use `@your_bot_name <your messages>` to invok
 - `/start`: Start the Bot.
 - `/role <prompt>`: Set role for conversation.
 - `/chat` : Invoke the Bot in group chat.
-- `/dalle <prompt>`: Ask DALL·E for a painting based on your prompt.
 - `/clear`: Clear the conversation context.
 - `/getid`: Get your Telegram user ID.
 
