@@ -5,6 +5,7 @@ import logging
 from access_manager import AccessManager
 from chat_session import ChatSession
 from openai_parser import OpenAIParser
+from azure_parser import AzureParser
 from config_loader import ConfigLoader
 from logging_manager import LoggingManager
 
