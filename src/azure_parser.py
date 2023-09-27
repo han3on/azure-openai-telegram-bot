@@ -15,8 +15,15 @@ class AzureParser:
             result = speech_recognizer.recognize_once(audio_file)
             transcript = result.text if result.reason == speechsdk.ResultReason.RecognizedSpeech else ""
         except Exception as e:
-            LoggingManager.error("Azure Speech to Text request for user %s with error: %s" % (userid, str(e)), "AzureParser")
+            error_message = f"Azure Speech to Text request for user {userid} failed with error: {str(e)}"
+            LoggingManager.error(error_message, "AzureParser")
             return ""
+
+        if result.reason != speechsdk.ResultReason.RecognizedSpeech:
+            error_message = f"Azure Speech to Text request for user {userid} failed to recognize speech."
+            LoggingManager.error(error_message, "AzureParser")
+            return ""
+
         return transcript
 
     def text_to_speech(self, text, file_id):
