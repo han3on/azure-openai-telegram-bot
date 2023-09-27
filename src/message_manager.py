@@ -13,6 +13,7 @@ class MessageManager:
     
     def __init__(self, access_manager):
         self.__openai_parser = OpenAIParser()
+        self.__azure_parser = AzureParser()
         self.__access_manager = access_manager
         self.__userDict = {}
 
