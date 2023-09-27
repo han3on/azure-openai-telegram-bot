@@ -31,8 +31,8 @@
         "limit_per_day": 5
     },
     "voice_message": {
-        "enable_voice": false,
-        "tts_reply": false,
+        "enable_voice": true,
+        "tts_reply": true,
         "text_as_caption": false
     },
     "azure_speech": {
