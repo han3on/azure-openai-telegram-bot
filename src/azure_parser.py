@@ -59,5 +59,3 @@ class AzureParser:
                 return ("en-US", "")
             else:
                 return (supported_languages[language], "")
-
-        
