@@ -5,7 +5,6 @@ import logging
 from access_manager import AccessManager
 from chat_session import ChatSession
 from openai_parser import OpenAIParser
-from azure_parser import AzureParser
 from config_loader import ConfigLoader
 from logging_manager import LoggingManager
 
@@ -14,7 +13,6 @@ class MessageManager:
     
     def __init__(self, access_manager):
         self.__openai_parser = OpenAIParser()
-        self.__azure_parser = AzureParser()
         self.__access_manager = access_manager
         self.__userDict = {}
 
@@ -68,7 +66,7 @@ class MessageManager:
     def get_transcript(self, user, audio_file):
         LoggingManager.debug("Get voice transcript for user: %s" % user, "MessageManager")
 
-        return self.__azure_parser.speech_to_text(user, audio_file)
+        return self.__openai_parser.speech_to_text(user, audio_file)
     
     def set_system_role(self, id, user, message):
         LoggingManager.debug("Set system role for chat: %s" % id, "MessageManager")
