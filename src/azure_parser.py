@@ -7,22 +7,6 @@ from logging_manager import LoggingManager
 class AzureParser:
 
     # return true for success, false for failure
-    def speech_to_text(self, userid, audio_file):
-        LoggingManager.debug("Get Azure Speech to Text with Language Detection for user: %s" % userid, "AzureParser")
-        speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_speech", "subscription_key"), region=ConfigLoader.get("azure_speech", "subscription_region"))
-        speech_config.enable_dictation()
-        speech_config.auto_detect_source_language = True
-        try:
-            audio_config = speechsdk.AudioConfig(audio_file)
-            speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
-            result = speech_recognizer.recognize_once()
-            transcript = result.text if result.reason == speechsdk.ResultReason.RecognizedSpeech else ""
-        except Exception as e:
-            LoggingManager.error("Azure Speech to Text with Language Detection request for user %s with error: %s" % (userid, str(e)), "AzureParser")
-            return ""
-
-        return transcript
-
     def text_to_speech(self, text, file_id):
         LoggingManager.info("Get Azure TTS request, file save to %s" % file_id, "AzureParser")
         speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_speech", "subscription_key"), region=ConfigLoader.get("azure_speech", "subscription_region"))
