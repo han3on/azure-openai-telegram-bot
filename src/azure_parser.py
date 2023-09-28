@@ -14,7 +14,7 @@ class AzureParser:
         speech_config.enable_dictation()
         speech_config.auto_detect_source_language = True
         try:
-            audio_config = AudioConfig.FromWavFileInput(audio_file)
+            audio_config = AudioConfig.from_wav_file_input(audio_file)
             speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
             result = speech_recognizer.recognize_once()
             transcript = result.text if result.reason == speechsdk.ResultReason.RecognizedSpeech else ""
