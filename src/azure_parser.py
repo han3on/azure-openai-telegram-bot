@@ -1,6 +1,7 @@
 import os
 import langid
 import azure.cognitiveservices.speech as speechsdk
+from azure.cognitiveservices.speech.audio import AudioConfig
 from config_loader import ConfigLoader
 from logging_manager import LoggingManager
 
