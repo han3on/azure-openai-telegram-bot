@@ -63,9 +63,10 @@ class OpenAIParser:
     def speech_to_text(self, userid, audio_file):
         LoggingManager.debug("Get Azure Speech to Text for user: %s" % userid, "OpenAIParser")
         speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_speech", "subscription_key"), region=ConfigLoader.get("azure_speech", "subscription_region"))
-        speech_config.enable_dictation()
+        with open(audio_file, "rb") as audio_file_handle:
+            audio_data = audio_file_handle.read()
         try:
-            audio_config = speechsdk.audio.AudioConfig(filename=audio_file)
+            audio_config = speechsdk.audio.AudioConfig(stream=speechsdk.audio.PullAudioInputStream(callback=lambda bufferSize: audio_data))
             speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
             result = speech_recognizer.recognize_once()
             transcript = result.text if result.reason == speechsdk.ResultReason.RecognizedSpeech else ""
