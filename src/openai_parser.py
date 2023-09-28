@@ -61,7 +61,7 @@ class OpenAIParser:
             return ("Oops, something went wrong with Azure OpenAI. Please try again later.", 0)
 
     def speech_to_text(self, userid, audio_file):
-        LoggingManager.debug("Get Azure Speech to Text with Language Detection for user: %s" % userid, "OpenAIParser")
+        LoggingManager.debug("Get Azure Speech to Text for user: %s" % userid, "OpenAIParser")
         speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_speech", "subscription_key"), region=ConfigLoader.get("azure_speech", "subscription_region"))
         speech_config.enable_dictation()
         try:
@@ -70,7 +70,7 @@ class OpenAIParser:
             result = speech_recognizer.recognize_once()
             transcript = result.text if result.reason == speechsdk.ResultReason.RecognizedSpeech else ""
         except Exception as e:
-            LoggingManager.error("Azure Speech to Text with Language Detection request for user %s with error: %s" % (userid, str(e)), "OpenAIParser")
+            LoggingManager.error("Azure Speech to Text request for user %s with error: %s" % (userid, str(e)), "OpenAIParser")
             return ""
 
         return transcript
