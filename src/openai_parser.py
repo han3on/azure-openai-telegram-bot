@@ -60,6 +60,21 @@ class OpenAIParser:
             LoggingManager.error("OpenAI GPT request for user %s with error: %s" % (userid, str(e)), "OpenAIParser")
             return ("Oops, something went wrong with Azure OpenAI. Please try again later.", 0)
 
+    def speech_to_text(self, userid, audio_file):
+        LoggingManager.debug("Get Azure Speech to Text with Language Detection for user: %s" % userid, "OpenAIParser")
+        speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_speech", "subscription_key"), region=ConfigLoader.get("azure_speech", "subscription_region"))
+        speech_config.enable_dictation()
+        try:
+            audio_config = speechsdk.audio.AudioConfig(filename=audio_file)
+            speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
+            result = speech_recognizer.recognize_once()
+            transcript = result.text if result.reason == speechsdk.ResultReason.RecognizedSpeech else ""
+        except Exception as e:
+            LoggingManager.error("Azure Speech to Text with Language Detection request for user %s with error: %s" % (userid, str(e)), "OpenAIParser")
+            return ""
+
+        return transcript
+    
     def image_generation(self, userid, prompt):
         LoggingManager.debug("Get OpenAI Image Generation for user: %s" % userid, "OpenAIParser")
         response = openai.Image.create(prompt = prompt, n=1, size = "512x512", user = userid)
