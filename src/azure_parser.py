@@ -8,20 +8,17 @@ class AzureParser:
 
     # return true for success, false for failure
     def speech_to_text(self, userid, audio_file):
-        LoggingManager.debug("Get Azure Speech to Text for user: %s" % userid, "AzureParser")
+        LoggingManager.debug("Get Azure Speech to Text with Language Detection for user: %s" % userid, "AzureParser")
         speech_config = speechsdk.SpeechConfig(subscription=ConfigLoader.get("azure_speech", "subscription_key"), region=ConfigLoader.get("azure_speech", "subscription_region"))
+        speech_config.enable_dictation()
+        speech_config.auto_detect_source_language = True
         try:
-            speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
-            result = speech_recognizer.recognize_once(audio_file)
+            audio_config = AudioConfig.FromWavFileInput(audio_file)
+            speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
+            result = speech_recognizer.recognize_once()
             transcript = result.text if result.reason == speechsdk.ResultReason.RecognizedSpeech else ""
         except Exception as e:
-            error_message = f"Azure Speech to Text request for user {userid} failed with error: {str(e)}"
-            LoggingManager.error(error_message, "AzureParser")
-            return ""
-
-        if result.reason != speechsdk.ResultReason.RecognizedSpeech:
-            error_message = f"Azure Speech to Text request for user {userid} failed to recognize speech."
-            LoggingManager.error(error_message, "AzureParser")
+            LoggingManager.error("Azure Speech to Text with Language Detection request for user %s with error: %s" % (userid, str(e)), "AzureParser")
             return ""
 
         return transcript
