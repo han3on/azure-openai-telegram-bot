@@ -16,6 +16,7 @@ import openai, json, os
 import datetime
 import logging
 import signal
+import azure.cognitiveservices.speech as speechsdk
 from config_loader import ConfigLoader
 from logging_manager import LoggingManager
 
